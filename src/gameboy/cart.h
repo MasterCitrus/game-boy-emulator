@@ -1,4 +1,7 @@
 #pragma once
+
+#include "cart_type.h"
+
 #include <stdint.h>
 
 const int MAX_CART_SIZE = 1024 * 1024;
@@ -31,6 +34,8 @@ public:
 	void print_cart_info();
 
 	void print_cart_data(uint16_t start_address, uint16_t end_address);
+
+	CartHeader* get_header() const;
 
 	uint8_t get(uint16_t address);
 

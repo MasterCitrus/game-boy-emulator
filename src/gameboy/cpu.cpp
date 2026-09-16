@@ -25,7 +25,7 @@ void CPU::reset()
 void CPU::fetch()
 {
     const uint16_t address = registers.pc;
-    current_opcode = mem->Read8(registers.pc++);
+    current_opcode = mem->Read(registers.pc++);
     const Instruction& instruction = instructions[current_opcode];
     current_instruction_execute = instruction.execute;
 }
@@ -53,10 +53,10 @@ void CPU::cpu_nop()
 void CPU::cpu_jp_nn()
 {
     Emulator::increment_cpu_clock_counter(4);
-    uint32_t temp = mem->Read8(registers.pc++);
+    uint32_t temp = mem->Read(registers.pc++);
     registers.pc &= 0xFFFF;
     Emulator::increment_cpu_clock_counter(4);
-    temp |= ((uint32_t)mem->Read8(registers.pc++) << 8);
+    temp |= ((uint32_t)mem->Read(registers.pc++) << 8);
     registers.pc &= 0xFFFF;
     Emulator::increment_cpu_clock_counter(4);
     registers.pc = temp;

@@ -37,6 +37,11 @@ void Cart::print_cart_data(uint16_t start_address, uint16_t end_address)
     }
 }
 
+CartHeader *Cart::get_header() const
+{
+    return header;
+}
+
 uint8_t Cart::get(uint16_t address)
 {
     return cart_data[address];

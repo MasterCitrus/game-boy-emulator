@@ -1,0 +1,6 @@
+[submodule "third_party/sdl"]
+	path = third_party/sdl
+	url = https://github.com/libsdl-org/SDL
+[submodule "third_party/imgui"]
+	path = third_party/imgui
+	url = https://github.com/ocornut/imgui

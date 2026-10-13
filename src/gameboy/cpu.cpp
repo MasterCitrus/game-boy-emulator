@@ -4,7 +4,13 @@
 #include "memory.h"
 #include "emulator.h"
 
-#include <print>
+#include <version>
+#ifdef __cpp_lib_print
+    #include <print>
+#else
+    #include <iostream>
+    #include <format>
+#endif
 
 CPU::CPU(Memory *mem)
 {
@@ -37,7 +43,11 @@ bool CPU::execute()
         const uint8_t pchi = ((registers.pc - 1) & 0xFF00) >> 8;
         const uint8_t pclo = ((registers.pc - 1) & 0xFF);
 
-        std::println("Unknown instruction {:02X} at: 0x{:02X}{:02X} {}", current_opcode, pchi, pclo, instruction.disassembly);
+        #ifdef __cpp_lib_print
+            std::println("Unknown instruction {:02X} at: 0x{:02X}{:02X} {}", current_opcode, pchi, pclo, instruction.disassembly);
+        #else
+            std::cout << std::format("Unknown instruction {:02X} at: 0x{:02X}{:02X} {}\n", current_opcode, pchi, pclo, instruction.disassembly);
+        #endif
         return false;
     }
 

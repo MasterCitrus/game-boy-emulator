@@ -1,7 +1,8 @@
 #include "cart.h"
 
 #include <fstream>
-#include <print>
+#include <format>
+#include <iostream>
 
 
 bool Cart::load_cart(const char* filename)
@@ -25,15 +26,15 @@ bool Cart::load_cart(const char* filename)
 
 void Cart::print_cart_info()
 {
-    std::println("Entry Point: {:X}{:X}{:X}{:X}", header->entry_point[0], header->entry_point[1], header->entry_point[2], header->entry_point[3]);
-    std::println("Title: {}", std::string_view(reinterpret_cast<const char*>(header->title), sizeof(header->title)));
+    std::cout << std::format("Entry Point: {:X}{:X}{:X}{:X}\n", header->entry_point[0], header->entry_point[1], header->entry_point[2], header->entry_point[3]);
+    std::cout << std::format("Title: {}\n", std::string_view(reinterpret_cast<const char*>(header->title), sizeof(header->title)));
 }
 
 void Cart::print_cart_data(uint16_t start_address, uint16_t end_address)
 {
     for (uint16_t i = start_address; i < end_address; ++i)
     {
-        std::println("Address {:04X}: {:02X}", i, cart_data[i]);
+        std::cout << std::format("Address {:04X}: {:02X}\n", i, cart_data[i]);
     }
 }
 

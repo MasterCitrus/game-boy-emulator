@@ -4,6 +4,7 @@
 #include "gameboy/cart.h"
 
 #include <SDL3/SDL.h>
+#include <iostream>
 
 uint32_t Emulator::cpu_clock_counter = 0;
 
@@ -63,6 +64,11 @@ void Emulator::run()
     {
         device.cart->print_cart_info();
         //device.cart->print_cart_data(0x100, 0x150);
+    }
+    else
+    {
+        std::cout << "Failed to load cartridge\n";
+        running = false;
     }
 
     // Main loop
